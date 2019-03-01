@@ -85,7 +85,7 @@ std::vector<double>* Plotter::genFft(fftwf_complex *data, int len) {
     fftwf_destroy_plan(my_plan);
     int c =  (int) floor((float)len/2);
     for(size_t i = 0; i < len; i ++){
-        fftAbs->push_back(10*log10(abs(fftData[i][0],fftData[i][1])));
+        fftAbs->push_back(abs(fftData[i][0],fftData[i][1]));
     }
     return fftAbs;
 }
