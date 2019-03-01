@@ -11,7 +11,7 @@ add_feature_info(LimeSuiteExamples ENABLE_EXAMPLES "LimeSuite library API exampl
 
 
 
-add_executable(singleRX main.cpp SdrDevice.cpp SdrDevice.h gnuplot-iostream.h plotter.cpp plotter.h)
+add_executable(singleRX main.cpp SdrDevice.cpp SdrDevice.h gnuplot-iostream.h plotter.cpp plotter.h DSP.cpp DSP.h)
 set_target_properties(singleRX PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 target_link_libraries(singleRX LimeSuite)
 if (UNIX)

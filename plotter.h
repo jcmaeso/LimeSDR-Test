@@ -17,6 +17,7 @@ public:
     void plotAbs(int windowNumber, fftwf_complex* data, int len);
     void plotFft(int windowNumber, fftwf_complex* data, int len);
     void closePlots();
+    void justPlot(int windowNumber, std::vector<double> *dataToPlot);
     ~Plotter();
 private:
     void swap(void *u1, void *u2, size_t i);

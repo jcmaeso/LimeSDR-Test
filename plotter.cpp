@@ -85,7 +85,7 @@ std::vector<double>* Plotter::genFft(fftwf_complex *data, int len) {
     fftwf_destroy_plan(my_plan);
     int c =  (int) floor((float)len/2);
     for(size_t i = 0; i < len; i ++){
-        fftAbs->push_back(abs(fftData[i][0],fftData[i][1]));
+        fftAbs->push_back(10*log10(abs(fftData[i][0],fftData[i][1])));
     }
     return fftAbs;
 }
@@ -105,5 +105,16 @@ void Plotter::closePlots() {
     for (size_t i = 0; i < numberOfWindows; i++) {
         *(windows[i]) << ("reset");
     }
+}
+
+void Plotter::justPlot(int windowNumber, std::vector<double> *dataToPlot) {
+    Gnuplot* pGnuplot;
+    if(windowNumber > this->numberOfWindows){
+        printf("Error in plotting impossible window number");
+        return;
+    }
+    pGnuplot = windows[windowNumber];
+    (*pGnuplot) << "plot '-' with lines notitle \n";
+    pGnuplot->send1d(*dataToPlot);
 }
 
