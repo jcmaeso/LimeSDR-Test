@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/LimeSuiteRx.dir/main.cpp.o  -o LimeSuiteRx 

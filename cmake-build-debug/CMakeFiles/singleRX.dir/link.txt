@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/singleRX.dir/main.cpp.o CMakeFiles/singleRX.dir/SdrDevice.cpp.o CMakeFiles/singleRX.dir/plotter.cpp.o CMakeFiles/singleRX.dir/DSP.cpp.o  -o bin/singleRX -lLimeSuite -lfftw3f -lm -lboost_iostreams -lboost_system -lboost_filesystem 

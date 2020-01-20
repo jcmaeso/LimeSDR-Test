@@ -8,6 +8,7 @@
 
 
 #define abs(n1,n2) sqrt(pow(n1,2)+pow(n2,2))
+#define phase(n1,n2) atan(n2/n1)
 
 bool block = false;
 bool getBlock(){
@@ -63,7 +64,7 @@ void Plotter::plot(int windowNumber, std::vector<double>* dataToPlot) {
 
 }
 
-void Plotter::plotFft(int windowNumber, fftwf_complex *data, int len) {
+void Plotter::plotFft(int windowNumber, fftwf_complex *data, int len,double* max_val) {
     std::vector<double>* plotValues;
     //printf("Bloqueo \n");
     //setBlock(true);
@@ -76,13 +77,21 @@ void Plotter::plotFft(int windowNumber, fftwf_complex *data, int len) {
 }
 
 
-std::vector<double>* Plotter::genFft(fftwf_complex *data, int len) {
+std::vector<double>* Plotter::genFft(fftwf_complex *data, int len,fftwf_complex* num) {
     fftwf_plan my_plan;
     std::vector<double>* fftAbs = new std::vector<double>();
     fftwf_complex* fftData = (fftwf_complex*) fftwf_malloc(sizeof(fftwf_complex)*len);
     my_plan = fftwf_plan_dft_1d(len, data, fftData, FFTW_FORWARD, FFTW_ESTIMATE);
     fftwf_execute(my_plan);
     fftwf_destroy_plan(my_plan);
+    double max_val = 0;
+    for(size_t i = 0; i < len; i++){
+        if(abs(fftData[i][0],fftData[i][1]) > max_val){
+            max_val = abs(fftData[i][0],fftData[i][1]);
+            num[0] = fftData[i][0];
+            num[1] = fftData[i][1];
+        }
+    }
     int c =  (int) floor((float)len/2);
     for(size_t i = 0; i < len; i ++){
         fftAbs->push_back(abs(fftData[i][0],fftData[i][1]));
